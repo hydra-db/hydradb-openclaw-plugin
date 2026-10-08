@@ -1,0 +1,43 @@
+{
+  "id": "hydradb",
+  "name": "HydraDB",
+  "version": "1.1.0",
+  "description": "Persistent long-term memory for OpenClaw via HydraDB: prompt-time recall, workspace sync, and conversation capture.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "api_key": {
+        "type": "string",
+        "description": "HydraDB API key (maps to HYDRA_OPENCLAW_API_KEY / HYDRADB_API_KEY)"
+      },
+      "database": {
+        "type": "string",
+        "description": "HydraDB database (tenant) to read and write"
+      },
+      "collection": {
+        "type": "string",
+        "description": "Optional collection (sub-tenant) scope"
+      },
+      "base_url": {
+        "type": "string",
+        "description": "HydraDB API base URL; defaults to https://api.hydradb.com"
+      }
+    }
+  },
+  "uiHints": {
+    "api_key": { "label": "HydraDB API key", "sensitive": true },
+    "database": { "label": "Database" },
+    "collection": { "label": "Collection (optional)" },
+    "base_url": { "label": "API base URL (optional)" }
+  },
+  "skills": [
+    "skills/auto-recall",
+    "skills/hydradb-context",
+    "skills/query",
+    "skills/ingest",
+    "skills/doctor",
+    "skills/last-recall",
+    "skills/setup"
+  ]
+}

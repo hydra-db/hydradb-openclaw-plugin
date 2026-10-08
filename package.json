@@ -1,0 +1,62 @@
+{
+  "name": "@hydra-db/hydradb-openclaw",
+  "version": "1.1.0",
+  "description": "Persistent long-term memory for OpenClaw via HydraDB: prompt-time recall, workspace sync, and conversation capture.",
+  "author": "HydraDB <support@hydradb.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://docs.hydradb.com/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hydra-db/hydradb-openclaw-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hydra-db/hydradb-openclaw-plugin/issues"
+  },
+  "keywords": [
+    "hydradb",
+    "memory",
+    "retrieval",
+    "openclaw",
+    "knowledge-base"
+  ],
+  "type": "module",
+  "main": "index.js",
+  "openclaw": {
+    "extensions": [
+      "./index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.6.0"
+    },
+    "build": {
+      "openclawVersion": "2026.6.35"
+    }
+  },
+  "files": [
+    "openclaw.plugin.json",
+    "index.js",
+    "assets",
+    "skills",
+    "scripts",
+    "hydradb-api-info",
+    "config.example.json",
+    ".hydradb-plugin.json.example",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "build:vendor": "node scripts/build-vendor.mjs",
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "devDependencies": {
+    "@hydradb/sdk": "2.1.2",
+    "esbuild": "0.28.1"
+  }
+}
