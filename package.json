@@ -1,6 +1,6 @@
 {
   "name": "@hydra-db/hydradb-openclaw",
-  "version": "1.1.0",
+  "version": "0.1.0",
   "description": "Persistent long-term memory for OpenClaw via HydraDB: prompt-time recall, workspace sync, and conversation capture.",
   "author": "HydraDB <support@hydradb.com>",
   "license": "Apache-2.0",
