@@ -90,3 +90,11 @@ turn (Claude provider) answered from recalled HydraDB context resolved via the
 ## License
 
 [Apache 2.0](LICENSE) - Copyright (c) 2026 HydraDB
+
+## Offline behavioral tests
+
+Run the query and metadata regression tests with Node.js:
+
+```bash
+node --test tests/openapi-query.test.mjs
+```
