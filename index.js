@@ -40,6 +40,16 @@ function parseContext(out) {
   return ""
 }
 
+/** Find the last assistant-authored message object in a message list. */
+function lastAssistantMessage(messages = []) {
+  if (!Array.isArray(messages)) return null
+  for (let i = messages.length - 1; i >= 0; i--) {
+    const m = messages[i]
+    if ((m?.role ?? m?.source?.kind) === "assistant") return m
+  }
+  return null
+}
+
 /**
  * OpenClaw plugin entry: registers typed hooks over the shared HydraDB engine.
  *
@@ -71,8 +81,14 @@ export default function hydradb(api) {
     runEngine("post-tool-use", JSON.stringify({ tool_input: { file_path: file } }), config)
   })
 
-  api.on("agent_end", async (event) => {
-    runEngine("stop", JSON.stringify({ session_id: event?.runId ?? "" }), config)
+  api.on("agent_end", async (event, ctx) => {
+    // Resolve the session id the same way as before_prompt_build (sessionId
+    // first, then runId) so the save reads the session that holds the pending
+    // prompt, and pass the assistant reply so the completed turn is captured.
+    const sessionId = ctx?.sessionId ?? event?.sessionId ?? ctx?.runId ?? event?.runId ?? "openclaw"
+    const assistant =
+      event?.response ?? event?.message ?? event?.output ?? event?.result ?? lastAssistantMessage(event?.messages)
+    runEngine("stop", JSON.stringify({ session_id: sessionId, last_assistant_message: assistant }), config)
   })
 
   api.on("session_start", async () => {
