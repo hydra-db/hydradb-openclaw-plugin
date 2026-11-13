@@ -82,9 +82,8 @@ export default function hydradb(api) {
   })
 
   api.on("agent_end", async (event, ctx) => {
-    // Resolve the session id the same way as before_prompt_build (sessionId
-    // first, then runId) so the save reads the session that holds the pending
-    // prompt, and pass the assistant reply so the completed turn is captured.
+    // Resolve the session id as before_prompt_build does (sessionId then runId)
+    // so the save targets the session holding the pending prompt.
     const sessionId = ctx?.sessionId ?? event?.sessionId ?? ctx?.runId ?? event?.runId ?? "openclaw"
     const assistant =
       event?.response ?? event?.message ?? event?.output ?? event?.result ?? lastAssistantMessage(event?.messages)
